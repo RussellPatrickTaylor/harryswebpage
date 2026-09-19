@@ -204,3 +204,36 @@ p {
     padding-top: 2rem;
   }
 }
+
+.star-rating {
+    --star-size: 30px;
+    --star-color: #ccc;
+    --star-color-filled: gold;
+    --stars: 5;
+
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    position: relative;
+}
+
+/* Grey background stars */
+.star-rating::before {
+    content: "★★★★★";
+    letter-spacing: 3px;
+    color: var(--star-color);
+}
+
+/* Gold overlay stars */
+.star-rating::after {
+    content: "★★★★★";
+    letter-spacing: 3px;
+    color: var(--star-color-filled);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--rating) / var(--stars) * 100%);
+    overflow: hidden;
+}
+
