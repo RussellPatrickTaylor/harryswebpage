@@ -1,3 +1,12 @@
+.youtube-embed {
+  width: 100%;           /* Fills the full width of the mobile phone screen */
+  max-width: 800px;      /* Optional: Keeps it from looking too big on a desktop */
+  aspect-ratio: 16 / 9;  /* Matches standard YouTube video proportions */
+  border: none;          /* Removes the default iframe border */
+  display: block;        /* Prevents extra spacing below the video */
+  margin: 0 auto;        /* Centers the video on desktop screens */
+}
+
 :root {
   --black: #000000;
   --white: #ffffff;
