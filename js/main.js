@@ -9,32 +9,32 @@ if (head) {
     crossEyed: "images/harry-cross-eyed.png"
   };
 
-  // Load the other images early so switching feels immediate.
+  // Preload the images so they are ready when the gaze changes.
   Object.values(images).forEach((src) => {
     const image = new Image();
     image.src = src;
   });
 
-  // Reveal the head one second after the page loads.
+  // Pop the head up one second after the page loads.
   window.setTimeout(() => {
     head.classList.add("is-visible");
   }, 1000);
 
-  window.addEventListener("pointermove", (event) => {
-    if (event.pointerType === "touch") return;
-
+  function updateGaze(event) {
     const rect = head.getBoundingClientRect();
+
     const eyeX = rect.left + rect.width * 0.5;
     const eyeY = rect.top + rect.height * 0.4;
+
+    // Adjust noseY if the nose appears at a different height in your images.
     const noseX = rect.left + rect.width * 0.5;
     const noseY = rect.top + rect.height * 0.7;
 
-    let gaze;
-
-    // Adjust these percentages to match where the nose appears in your image.
     const isOverNose =
       Math.abs(event.clientX - noseX) < rect.width * 0.12 &&
       Math.abs(event.clientY - noseY) < rect.height * 0.12;
+
+    let gaze;
 
     if (isOverNose) {
       gaze = "crossEyed";
@@ -45,8 +45,14 @@ if (head) {
     }
 
     const nextImage = images[gaze];
-    if (!head.src.endsWith(nextImage)) {
-      head.src = nextImage;
+
+    // Only change the image when the gaze direction changes.
+    if (head.getAttribute("src") !== nextImage) {
+      head.setAttribute("src", nextImage);
     }
-  });
+  }
+
+  // Mouse movement, finger movement and taps.
+  window.addEventListener("pointermove", updateGaze);
+  window.addEventListener("pointerdown", updateGaze);
 }

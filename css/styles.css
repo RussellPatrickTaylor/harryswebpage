@@ -268,8 +268,10 @@ p {
 
 @media (max-width: 600px) {
   .home-head {
-    width: min(62vw, 260px);
-    max-height: 35vh;
+    width: auto;
+    height: 45vh;
+    max-width: 100vw;
+    max-height: none;
   }
 }
 
