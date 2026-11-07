@@ -246,3 +246,36 @@ p {
     overflow: hidden;
 }
 
+.home-head {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  bottom: 0;
+
+  width: min(100vw, 1920px);
+  max-height: 45vh;
+  height: auto;
+  object-fit: contain;
+
+  transform: translate(-50%, 110%);
+  transition: transform 650ms ease;
+  pointer-events: none;
+}
+
+.home-head.is-visible {
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 600px) {
+  .home-head {
+    width: min(62vw, 260px);
+    max-height: 35vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-head {
+    transform: translate(-50%, 0);
+    transition: none;
+  }
+}
